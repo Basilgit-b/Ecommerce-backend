@@ -1,7 +1,9 @@
 #E -commerce BackEnd(Spring Boot)
 
 ## Description
-This is a backend application that using Spring Boot.Currently it supports user registration functionality
+This is a backend application that using Spring Boot.Currently it supports 
+- user registration functionality
+- Product Management
 
 ## Tech Stack
 - Java
@@ -11,8 +13,14 @@ This is a backend application that using Spring Boot.Currently it supports user 
 - Maven
 - Swagger/Postman
 
-## API
-POST users/register
+## API Overview
+
+### User APIs
+- POST /users/register
+
+### Product APIs
+- POST /products/create
+- GET /products/all
 
 # Request
 ```json
@@ -24,3 +32,7 @@ POST users/register
 ```
 ## Author
 Basil
+
+## Progress
+- Day 1: User Registration
+- Day 2: Product Module(Create +Get)
