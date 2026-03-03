@@ -1,5 +1,7 @@
 package com.BasilEcom.service;
 
+import com.BasilEcom.dto.ProductRequestDTO;
+import com.BasilEcom.dto.ProductResponseDTO;
 import com.BasilEcom.entity.Product;
 import com.BasilEcom.repository.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -13,12 +15,33 @@ public class ProductService {
     {
         this.productRepository=productRepository;
     }
-    public Product createProduct(Product product)
+    public ProductResponseDTO createProduct(ProductRequestDTO dto)
     {
-        return productRepository.save(product);
+        Product product= new Product();
+        product.setName(dto.getName());
+        product.setDescription(dto.getDescription());
+        product.setPrice(dto.getPrice());
+        product.setQuantity(dto.getQuantity());
+        Product saved= productRepository.save(product);
+
+        ProductResponseDTO response = new ProductResponseDTO();
+        response.setId(saved.getId());
+        response.setName(saved.getName());
+        response.setDescription(saved.getDescription());
+        response.setPrice(saved.getPrice());
+        response.setQuantity(saved.getQuantity());
+        return response;
     }
-    public List<Product> getAllProduct()
+    public List<ProductResponseDTO> getAllProduct()
     {
-        return productRepository.findAll();
+        return productRepository.findAll()
+                .stream().map(product->{
+                    ProductResponseDTO dto= new  ProductResponseDTO();
+                    dto.setId(product.getId());
+                    dto.setName(product.getName());
+                    dto.setDescription(product.getDescription());
+                    dto.setPrice(product.getPrice());
+                    return dto;
+                }).toList();
     }
 }

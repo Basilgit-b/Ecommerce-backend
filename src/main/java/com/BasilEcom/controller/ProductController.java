@@ -1,5 +1,7 @@
 package com.BasilEcom.controller;
 
+import com.BasilEcom.dto.ProductRequestDTO;
+import com.BasilEcom.dto.ProductResponseDTO;
 import com.BasilEcom.entity.Product;
 import com.BasilEcom.service.ProductService;
 import org.springframework.web.bind.annotation.*;
@@ -14,12 +16,12 @@ public class ProductController {
         this.productService=productService;
     }
     @PostMapping("/create")
-    public Product create(@RequestBody Product product)
+    public ProductResponseDTO create(@RequestBody ProductRequestDTO dto)
     {
-        return productService.createProduct(product);
+        return productService.createProduct(dto);
     }
     @GetMapping("/all")
-    public List<Product> create()
+    public List<ProductResponseDTO> create()
     {
         return productService.getAllProduct();
     }
