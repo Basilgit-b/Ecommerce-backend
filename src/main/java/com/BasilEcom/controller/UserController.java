@@ -1,5 +1,7 @@
 package com.BasilEcom.controller;
 
+import com.BasilEcom.dto.UserRequestDTO;
+import com.BasilEcom.dto.UserResponseDTO;
 import com.BasilEcom.entity.User;
 
 import com.BasilEcom.service.UserService;
@@ -18,8 +20,8 @@ public class UserController {
         this.userService=userService;
     }
     @PostMapping("/register")
-    public User register(@RequestBody User user)
+    public UserResponseDTO register(@RequestBody UserRequestDTO dto)
     {
-        return userService.register(user);
+        return userService.register(dto);
     }
 }

@@ -1,5 +1,6 @@
 package com.BasilEcom.controller;
 
+import com.BasilEcom.dto.OrderResponseDTO;
 import com.BasilEcom.service.CartService;
 import com.BasilEcom.service.OrderService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +17,7 @@ public class OrderController {
         this.orderService=orderService;
     }
     @PostMapping("/place")
-    public String placeorder(@RequestParam Long userId)
+    public OrderResponseDTO placeorder(@RequestParam Long userId)
     {
        return orderService.placeOrder(userId);
 

@@ -4,6 +4,7 @@ import com.BasilEcom.Exception.CartEmptyException;
 import com.BasilEcom.Exception.CartNotFoundException;
 import com.BasilEcom.Exception.OutOfStockException;
 import com.BasilEcom.Exception.ResourceNotFoundException;
+import com.BasilEcom.dto.OrderResponseDTO;
 import com.BasilEcom.entity.*;
 import com.BasilEcom.repository.*;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class OrderService {
         this.productRepository=productRepository;
     }
 
-    public String placeOrder(Long userId)
+    public OrderResponseDTO placeOrder(Long userId)
     {
         Cart cart = cartRepository.findByUserId(userId)
                 .orElseThrow(()-> new CartNotFoundException("Cart Not Found"));
@@ -68,6 +69,11 @@ public class OrderService {
         order.setTotalAmount(totalAmount);
         orderRepository.save(order);
         cartItemRepository.deleteAll(cartItems);
-        return "Order placed successfully";
+
+        OrderResponseDTO response = new OrderResponseDTO();
+        response.setOrderId(savedOrder.getId());
+        response.setTotalAmount(totalAmount);
+        response.setMessage("Order placed successfully");
+        return response;
     }
 }
